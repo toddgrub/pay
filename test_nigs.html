@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Google Pay Success</title>
   <style>
     html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
+      margin: 0; padding: 0;
+      height: 100%; width: 100%;
       background-color: #fff;
       font-family: Roboto, Arial, sans-serif;
       display: flex;
@@ -16,6 +14,8 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      cursor: pointer;
+      user-select: none;
     }
 
     .checkmark {
@@ -45,25 +45,49 @@
       z-index: 0;
     }
 
-    audio {
-      display: none;
+    #message {
+      position: absolute;
+      bottom: 20px;
+      font-size: 14px;
+      color: #888;
+      font-style: italic;
     }
   </style>
 </head>
 <body>
 
-  <div class="checkmark">
-    <svg viewBox="0 0 24 24">
+  <div class="checkmark" aria-label="Success checkmark">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
       <polyline points="20 6 9 17 4 12"></polyline>
     </svg>
   </div>
 
-  <img class="gpay-logo" src="https://blog.usenosh.com/wp-content/uploads/2024/02/111562-googlepay.jpg" alt="Google Pay Logo">
+  <img
+    class="gpay-logo"
+    src="https://blog.usenosh.com/wp-content/uploads/2024/02/111562-googlepay.jpg"
+    alt="Google Pay Logo"
+  />
 
-  <audio autoplay>
-    <source src="https://toddgrub.github.io/pay/applepay.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
+  <div id="message">Click anywhere to hear confirmation sound</div>
+
+  <audio id="successAudio" preload="auto">
+    <source src="https://toddgrub.github.io/pay/applepay.mp3" type="audio/mpeg" />
   </audio>
+
+  <script>
+    const audio = document.getElementById('successAudio');
+    const message = document.getElementById('message');
+
+    function playSound() {
+      audio.play().catch(() => {
+        // ignore errors if any
+      });
+      message.style.display = 'none';
+      window.removeEventListener('click', playSound);
+    }
+
+    window.addEventListener('click', playSound);
+  </script>
 
 </body>
 </html>
