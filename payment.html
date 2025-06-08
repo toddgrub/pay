@@ -68,7 +68,7 @@
     alt="Google Pay Logo"
   />
 
-  <div id="message">Click anywhere to hear confirmation sound</div>
+  <div id="message">Click anywhere to play confirmation sound</div>
 
   <audio id="successAudio" preload="auto">
     <source src="https://toddgrub.github.io/pay/applepay.mp3" type="audio/mpeg" />
@@ -76,17 +76,14 @@
 
   <script>
     const audio = document.getElementById('successAudio');
-    const message = document.getElementById('message');
 
-    function playSound() {
+    window.addEventListener('click', () => {
+      // Reset audio to start every time
+      audio.currentTime = 0;
       audio.play().catch(() => {
-        // ignore errors if any
+        // ignore autoplay restrictions silently
       });
-      message.style.display = 'none';
-      window.removeEventListener('click', playSound);
-    }
-
-    window.addEventListener('click', playSound);
+    });
   </script>
 
 </body>
